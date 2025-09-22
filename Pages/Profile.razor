@@ -1,0 +1,39 @@
+@page "/profile"
+<div class="row">
+    <div class="col-4 card">
+        <img class="card-img-top"
+            src="https://tse1.mm.bing.net/th/id/OIP.nWwSbXBa4_X21Rb0JUjkBAHaFj?rs=1&pid=ImgDetMain&o=7&rm=3" alt="">
+        <div class="card-body">
+            <h4 class="card-title">@Name</h4>
+            <p class="card-text">Dev</p>
+            <p class="card-text">Tong hai so 3 va 5 la: @Tong(3, 5)</p>
+        </div>
+    </div>
+
+    <div class="col-4 card">
+        <img class="card-img-top"
+            src="https://tse1.mm.bing.net/th/id/OIP.nWwSbXBa4_X21Rb0JUjkBAHaFj?rs=1&pid=ImgDetMain&o=7&rm=@Counter" alt="">
+        <div class="card-body">
+            <h4 class="card-title">@Name</h4>
+            <p class="card-text">@Counter</p>
+            <a class="btn btn-primary" @onclick="Like">Like</a>
+
+        </div>
+    </div>
+</div>
+
+@code {
+    string Name { get; set; } = "Phi";
+
+    public int Tong(int a, int b)
+    {
+        return a + b;
+    }
+
+    int Counter = 0;
+
+    void Like()
+    {
+        Counter++;
+    }
+}

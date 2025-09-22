@@ -1,0 +1,29 @@
+@using balazorserver2.Shared
+
+@inherits LayoutComponentBase
+
+<header class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+    <div class="container-fluid">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <NavLink class="nav-link" href="/" Match="NavLinkMatch.All" activeClass="active">Home</NavLink>
+            </li>
+            <li class="nav-item">
+                <NavLink class="nav-link" href="/login" Match="NavLinkMatch.Prefix" activeClass="active">Login</NavLink>
+            </li>
+            <li class="nav-item">
+                <NavLink class="nav-link" href="/profile" Match="NavLinkMatch.Prefix" activeClass="active">Profile</NavLink>
+            </li>
+            <li class="nav-item">
+                <NavLink class="nav-link" href="/product-list" Match="NavLinkMatch.Prefix" activeClass="active">Product List</NavLink>
+            </li>
+            <li class="nav-item">
+                <NavLink class="nav-link" href="/admin" Match="NavLinkMatch.Prefix" activeClass="active">ADMIN</NavLink>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<main class="container mt-5 pt-4">
+    @Body
+</main>

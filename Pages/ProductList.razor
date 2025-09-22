@@ -1,0 +1,54 @@
+@page "/product-list"
+@using System.Security.AccessControl
+@using System.Net.NetworkInformation
+@using Microsoft.AspNetCore.Http.Features
+
+<div class="container">
+    <h1 class="text-center">Danh sach san pham</h1>
+    <div class="row">
+        @foreach (var item in productVms)
+        {
+            <ProductCart item="@item" />
+        }
+    </div>
+</div>
+
+<div class="container mt-5">
+    <h3 class="text-center">Danh sach gio hang</h3>
+    <div class="table-responsive">
+        <table class="table table-primary">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Img</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="">
+                    <td scope="row">1</td>
+                    <td>ImageUrl</td>
+                    <td>Name</td>
+                    <td>Price</td>
+                    <td>Description</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+@code {
+    List<ProductVm> productVms = new List<ProductVm>(){
+new ProductVm { Name = "Product 1", Description = "Description 1", Price = 10.99m, ImageUrl = "products/black-car.jpg"
+},
+new ProductVm { Name = "Product 2", Description = "Description 2", Price = 12.99m, ImageUrl = "products/red-car.jpg" },
+new ProductVm { Name = "Product 3", Description = "Description 3", Price = 15.99m, ImageUrl = "products/silver-car.jpg"
+}
+};
+
+
+}
