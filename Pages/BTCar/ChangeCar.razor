@@ -1,0 +1,37 @@
+@page "/change-car-color"
+@using Microsoft.Identity.Client
+
+
+<div class="container">
+    <h3>Change car color</h3>
+    <div class="row">
+        <div class="col-6">
+            <img src="products/@imgCar" class="img-fluid rounded-top" alt="" />
+        </div>
+        <div class="col-6 d-flex justify-content-evenly align-items-start">
+        <button class="btn btn-danger">Red</button>
+         <button class="btn btn-dark">Black</button>
+         <button class="btn btn-secondary">Silver</button>
+          <button class="btn btn-light">Steel</button>
+        </div>
+
+        <br>
+        <div class="col-6 d-flex justify-content-evenly align-items-start">
+
+        @foreach(var item in dsColor){
+            <button class="btn btn-light" @onclick="()=>ChangeColor(item)" >@item</button>
+        }
+        </div>
+        
+    </div>
+</div>
+
+@code{
+    private string imgCar = "red-car.jpg";
+
+    private List<string> dsColor = new List<string>{"red", "black", "silver","steel"};
+
+    private void ChangeColor(string color){
+        imgCar = color + "-car.jpg";
+    }
+}
