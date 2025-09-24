@@ -28,6 +28,11 @@
                     <ValidationMessage For="@(() => user.Password)"/>
                 </div>
                 <div class="mb-3">
+                    <label for="dateOfBirth" class="form-label">Date of Birth</label>
+                    <input type="date" class="form-control" id="dateOfBirth" @bind="@user.DateOfBirth" />
+                    <ValidationMessage For="@(() => user.DateOfBirth)"/>
+                </div>
+                <div class="mb-3">
                     <p>Gender</p>
                     <div class="form-check form-check-inline">
                         <input id="nam" class="form-check-input" type="radio" name="gender" value="false"
@@ -61,7 +66,7 @@
                     }
                 </div>
                 <div class="mb-3">
-                    <button class="btn btn-primary" type="submit">Register</button>
+                    <button class="btn btn-primary" type="submit" @onclick="HandleSubmit">Register</button>
                 </div>
             </EditForm>
         </div>
@@ -72,6 +77,8 @@
             <p>Username: @user.UserName</p>
             <p>Email: @user.Email</p>
             <p>Password: @user.Password </p>
+            @*  // ToShortDateString dung để hiển thị ngày tháng năm ngắn gọn *@
+            <p>Date of Birth: @user.DateOfBirth.ToShortDateString()</p>
             <p>Gender: @user.Gender</p>
             <p>City: @user.City</p>
             @* //dùng string.join để nối các phần tử trong list thành chuỗi *@
@@ -99,6 +106,7 @@
         Console.WriteLine($"Username: {user.UserName}");
         Console.WriteLine($"Email: {user.Email}");
         Console.WriteLine($"Password: {user.Password}");
+        Console.WriteLine($"Date of Birth: {user.DateOfBirth.ToShortDateString()}");
         Console.WriteLine($"Gender: {user.Gender}");
         Console.WriteLine($"City: {user.City}");
         Console.WriteLine($"Hobbies: {string.Join(", ", user.Hobbies)}");

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -20,5 +21,6 @@ public class UserRegisterVM
 
     [Required(ErrorMessage = "City không được để trống")]
     public string City { get; set; } = "";
+    public DateTime DateOfBirth { get; set; } = DateTime.Now;
     public List<string> Hobbies { get; set; } = new List<string>();
 }
