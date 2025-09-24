@@ -1,4 +1,5 @@
 ﻿@page "/"
+@* để đổi tên title cho từng route riêng *@
 @using Microsoft.AspNetCore.Components.Web
 
 @namespace balazorserver2.Pages
@@ -26,8 +27,9 @@
     <link href="css/site.css" rel="stylesheet" />
     @* blazor2.styles.css là file css được biên dịch ra từ css component , cần gắn link này thì mới áp dụng css ở file component được . VD Login.razor.css *@
     <link rel="stylesheet" href="balazorserver2.styles.css">
-    <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
+
     @* để đổi tên title cho từng route riêng *@
+    <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
 
 <body>

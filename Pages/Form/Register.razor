@@ -1,0 +1,132 @@
+@page "/register"
+@using System.ComponentModel.DataAnnotations
+@using System.Data
+<PageTitle>Register</PageTitle>
+
+<div class="container">
+    <h2 class="text-center">Register Page</h2>
+    <div class="row">
+        @* form input *@
+        <div class="col-6">
+            <h3 class="text-center mt-3 mb-3">Form Register</h3>
+            <EditForm Model="@user">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" @bind="@user.UserName" />
+                    @* <ValidationMessage For="@(() => user.Username)"/> *@
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="text" class="form-control" id="email" @bind="@user.Email" />
+                    @* <ValidationMessage For="@(() => user.Email)"/> *@
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" @bind="@user.Password" />
+                    @* <ValidationMessage For="@(() => user.Password)"/> *@
+                </div>
+                <div class="mb-3">
+                    <p>Gender</p>
+                    <div class="form-check form-check-inline">
+                        <input id="nam" class="form-check-input" type="radio" name="gender" value="false"
+                            checked="@user.Gender.Equals(false)" @onclick="() => ChangeGender(false)" />
+                        <label for="nam" class="form-check-label">Nam</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input id="nu" class="form-check-input" value="true" type="radio" name="gender"
+                            checked="@user.Gender.Equals(true)" @onclick="() => ChangeGender(true)" />
+                        <label for="nu" class="form-check-label">Nữ</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">City</label>
+                    <select class="form-control" @bind="@user.City">
+                        <option value="Việt Nam">Việt Nam</option>
+                        <option value="Nhật Bản">Nhật Bản</option>
+                        <option value="Campuchia">Campuchia</option>
+                    </select>
+                    @* <ValidationMessage For="@(() => user.City)"/> *@
+                </div>
+                <div class="mb-3">
+                    <p>Hobbies</p>
+                    @foreach (var item in allHobbies)
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" checked="@user.Hobbies.Contains(item)"
+                                @onchange="(e) => ChangeHobby(item, e.Value)" />
+                            <label class="form-check-label">@item</label>
+                        </div>
+                    }
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-primary" type="submit">Register</button>
+                </div>
+            </EditForm>
+        </div>
+
+        @* danh sách *@
+        <div class="col-6 ps-5 mb-3">
+            <h3 class="text-center mt-3 mb-3">Show info thông tin</h3>
+            <p>Username: @user.UserName</p>
+            <p>Email: @user.Email</p>
+            <p>Password: @user.Password </p>
+            <p>Gender: @user.Gender</p>
+            <p>City: @user.City</p>
+            @* //dùng string.join để nối các phần tử trong list thành chuỗi *@
+            <p>Hobbies: @string.Join(", ", user.Hobbies)</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<string> allHobbies = new List<string>{
+"Ăn uống",
+"Ngủ",
+"Chơi game",
+"Du lịch",
+"Xem phim"
+};
+
+    private UserRegisterVM user = new UserRegisterVM();
+
+    @* đổi giới tính *@
+    private void ChangeGender(bool gender)
+    {
+        user.Gender = gender;
+    }
+
+
+    @* đổi sở thích *@
+    @* hàm sẽ nhận vào 2 giá trị thứ nhất là sở thích là gì nhận vào chuỗi, thứ hai là trạng thái của checkbox: có chọn hay không chọn *@
+    private void ChangeHobby(string hobby, object checkValue)
+    {
+        // true , false
+        // vd checlvalue = false/ true
+        @* bool checkValueIsBool = checkValue is bool b; *@
+        // đều đúng nếu là checkValue là true hay false
+        if (checkValue is bool b)
+        {
+            // kiểm tra kiểu dữ liệu
+            // b lúc này là true/ false
+            // kiểu tra giá trị
+            if (b)
+            {
+                // true -> thêm sở thích
+                if (!user.Hobbies.Contains(hobby))
+                {
+                    // chưa có thì thêm
+                    user.Hobbies.Add(hobby);
+                }
+            }
+            else
+            {
+                // false -> xóa sở thích
+                if (user.Hobbies.Contains(hobby))
+                {
+                    // có thì xoá
+                    user.Hobbies.Remove(hobby);
+                }
+            }
+        }
+    }
+}
