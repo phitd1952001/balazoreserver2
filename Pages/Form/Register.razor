@@ -9,21 +9,23 @@
         @* form input *@
         <div class="col-6">
             <h3 class="text-center mt-3 mb-3">Form Register</h3>
-            <EditForm Model="@user">
+            <EditForm Model="@user" OnInvalidSubmit="HandleSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" @bind="@user.UserName" />
-                    @* <ValidationMessage For="@(() => user.Username)"/> *@
+                    <ValidationMessage For="@(() => user.UserName)" />
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
                     <input type="text" class="form-control" id="email" @bind="@user.Email" />
-                    @* <ValidationMessage For="@(() => user.Email)"/> *@
+                    <ValidationMessage For="@(() => user.Email)"/>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" @bind="@user.Password" />
-                    @* <ValidationMessage For="@(() => user.Password)"/> *@
+                    <ValidationMessage For="@(() => user.Password)"/>
                 </div>
                 <div class="mb-3">
                     <p>Gender</p>
@@ -45,7 +47,7 @@
                         <option value="Nhật Bản">Nhật Bản</option>
                         <option value="Campuchia">Campuchia</option>
                     </select>
-                    @* <ValidationMessage For="@(() => user.City)"/> *@
+                    <ValidationMessage For="@(() => user.City)"/>
                 </div>
                 <div class="mb-3">
                     <p>Hobbies</p>
@@ -88,6 +90,19 @@
 };
 
     private UserRegisterVM user = new UserRegisterVM();
+
+    @* hàm lưu thông tin *@
+    private void HandleSubmit()
+    {
+        // lưu thông tin
+        Console.WriteLine("Lưu thông tin thành công");
+        Console.WriteLine($"Username: {user.UserName}");
+        Console.WriteLine($"Email: {user.Email}");
+        Console.WriteLine($"Password: {user.Password}");
+        Console.WriteLine($"Gender: {user.Gender}");
+        Console.WriteLine($"City: {user.City}");
+        Console.WriteLine($"Hobbies: {string.Join(", ", user.Hobbies)}");
+    }
 
     @* đổi giới tính *@
     private void ChangeGender(bool gender)
